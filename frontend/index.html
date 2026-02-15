@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Management System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Budget System</h2>
+    <ul>
+      <li onclick="showPage('dashboard')">Dashboard</li>
+      <li onclick="showPage('addExpense')">Add Expense</li>
+      <li onclick="showPage('history')">History</li>
+      <li onclick="showPage('analytics')">Analytics</li>
+    </ul>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div id="notification" class="notification"></div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page">
+      <h2>Dashboard</h2>
+
+      <table class="summary-table">
+        <tr>
+          <th>Total Spent</th>
+          <td id="spent">₹0</td>
+        </tr>
+        <tr>
+          <th>Monthly Budget</th>
+          <td>
+            ₹ <span id="budgetAmount">0</span><br><br>
+            <input type="number" id="dashboardBudgetInput" placeholder="Enter budget">
+            <button id="updateBudgetBtn">Update Budget</button>
+          </td>
+        </tr>
+        <tr>
+          <th>Remaining</th>
+          <td id="remaining">₹0</td>
+        </tr>
+      </table>
+
+      <h3>Overview (small & calm)</h3>
+      <div class="dashboard-chart-box">
+        <canvas id="summaryChart"></canvas>
+      </div>
+    </div>
+
+    <!-- ADD EXPENSE -->
+    <div id="addExpense" class="page hidden">
+      <h2>Add Expense</h2>
+      <input type="number" id="expenseAmount" placeholder="Amount"><br><br>
+      <select id="expenseCategory">
+        <option>Food</option>
+        <option>Travel</option>
+        <option>Clothes</option>
+        <option>Other</option>
+      </select><br><br>
+      <button id="addExpenseBtn">Save Expense</button>
+    </div>
+
+    <!-- HISTORY -->
+    <div id="history" class="page hidden">
+      <h2>Expense History</h2>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div id="analytics" class="page hidden">
+      <h2>Analytics</h2>
+      <div class="analytics-box">
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
