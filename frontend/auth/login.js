@@ -3,6 +3,7 @@ const registerForm = document.getElementById("registerForm");
 const msg = document.getElementById("msg");
 const regMsg = document.getElementById("regMsg");
 
+/* ===== SWITCH FORMS ===== */
 function showRegister(){
   loginForm.classList.add("hidden");
   registerForm.classList.remove("hidden");
@@ -13,55 +14,77 @@ function showLogin(){
   loginForm.classList.remove("hidden");
 }
 
+/* ===== LOGIN ===== */
 loginForm.addEventListener("submit",async(e)=>{
   e.preventDefault();
 
-  const loginId=document.getElementById("loginId").value;
-  const password=document.getElementById("password").value;
+  const loginId=document.getElementById("loginId").value.trim();
+  const password=document.getElementById("password").value.trim();
 
-  const res=await fetch("http://localhost:5000/api/login",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({loginId,password})
-  });
+  try{
 
-  const data=await res.json();
+    const res=await fetch("http://localhost:5000/api/auth/login",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({loginId,password})
+    });
 
-  if(!res.ok){
-    msg.innerText=data.message||"Login failed";
-    return;
+    const data=await res.json();
+
+    if(!res.ok){
+      msg.innerText=data.message||"Login failed";
+      return;
+    }
+
+    /* CLEAR OLD DATA */
+    localStorage.clear();
+
+    /* SAVE USER DATA */
+    localStorage.setItem("user_id",data.userId);
+    localStorage.setItem("user_name",data.name);
+
+    /* REDIRECT TO DASHBOARD */
+    window.location.href="../dashboard/index.html";
+
+  }catch(err){
+    console.log("Login error:",err);
+    msg.innerText="Server error";
   }
 
-  localStorage.clear();
-  localStorage.setItem("user_id",data.userId);  // IMPORTANT
-  localStorage.setItem("user_name",data.name);
-
-  window.location.href="../index.html";
 });
 
+/* ===== REGISTER ===== */
 registerForm.addEventListener("submit",async(e)=>{
   e.preventDefault();
 
   const body={
-    name:name.value,
-    email:email.value,
-    phone:phone.value,
-    password:regPassword.value
+    name:document.getElementById("name").value.trim(),
+    email:document.getElementById("email").value.trim(),
+    phone:document.getElementById("phone").value.trim(),
+    password:document.getElementById("regPassword").value.trim()
   };
 
-  const res=await fetch("http://localhost:5000/api/register",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(body)
-  });
+  try{
 
-  const data=await res.json();
+    const res=await fetch("http://localhost:5000/api/auth/register",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(body)
+    });
 
-  if(!res.ok){
-    regMsg.innerText=data.message||"Register failed";
-    return;
+    const data=await res.json();
+
+    if(!res.ok){
+      regMsg.innerText=data.message||"Register failed";
+      return;
+    }
+
+    regMsg.innerText="Registration successful. Login now.";
+    showLogin();
+
+  }catch(err){
+    console.log("Register error:",err);
+    regMsg.innerText="Server error";
   }
 
-  regMsg.innerText="Registration successful. Login now.";
-  showLogin();
 });

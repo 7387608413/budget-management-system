@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Budget Management System</title>
+  <title>BudgetPro Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -12,7 +12,7 @@
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <h2>Budget System</h2>
+    <h2>BudgetPro</h2>
     <ul>
       <li onclick="showPage('dashboard')">Dashboard</li>
       <li onclick="showPage('addExpense')">Add Expense</li>
@@ -26,9 +26,10 @@
 
     <div id="notification" class="notification"></div>
 
-    <!-- DASHBOARD -->
+    <!-- ================= DASHBOARD ================= -->
     <div id="dashboard" class="page">
-      <h2>Dashboard</h2>
+
+      <h2>Overview</h2>
 
       <table class="summary-table">
         <tr>
@@ -49,52 +50,51 @@
         </tr>
       </table>
 
-      <h3>Overview (small & calm)</h3>
       <div class="dashboard-chart-box">
         <canvas id="summaryChart"></canvas>
       </div>
+
     </div>
 
-    <!-- ADD EXPENSE -->
+    <!-- ================= ADD EXPENSE ================= -->
     <div id="addExpense" class="page hidden">
+
       <h2>Add Expense</h2>
+
       <input type="number" id="expenseAmount" placeholder="Amount"><br><br>
-      <select id="expenseCategory">
-        <option>Food</option>
-        <option>Travel</option>
-        <option>Clothes</option>
-        <option>Other</option>
-      </select><br><br>
+
+      <input type="text" id="expenseCategory"
+             placeholder="Enter Category (Food, Rent, Travel...)"><br><br>
+
       <button id="addExpenseBtn">Save Expense</button>
+
     </div>
 
-    <!-- HISTORY -->
+    <!-- ================= HISTORY ================= -->
     <div id="history" class="page hidden">
-      <h2>Expense History</h2>
-      <table class="history-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Category</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody id="historyBody"></tbody>
-      </table>
+
+      <h2 class="history-title">Transaction History</h2>
+
+      <div id="historyList" class="history-list"></div>
+
     </div>
 
-    <!-- ANALYTICS -->
+    <!-- ================= ANALYTICS ================= -->
     <div id="analytics" class="page hidden">
+
       <h2>Analytics</h2>
+
       <div class="analytics-box">
         <canvas id="categoryChart"></canvas>
       </div>
+
     </div>
 
   </div>
+
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>

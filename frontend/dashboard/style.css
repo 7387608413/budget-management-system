@@ -1,0 +1,232 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 25px 15px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateX(5px);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* Glass Card */
+.page {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(25px);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Summary Table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.summary-table th {
+  text-align: left;
+  opacity: 0.7;
+}
+
+/* Inputs */
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #1e3c72, #2c5364);
+  color: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #2c5364, #1e3c72);
+  transform: translateY(-2px);
+}
+
+/* History Table */
+/* ================= HISTORY CARDS ================= */
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.history-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(18px);
+  padding: 18px 22px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.35s ease;
+  border-left: 4px solid #00c6ff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.history-card:hover {
+  transform: translateX(8px);
+  background: rgba(255,255,255,0.08);
+}
+
+.history-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-category {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.history-date {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.history-amount {
+  font-size: 17px;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+/* smooth entry animation */
+.history-card {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeSlide 0.5s ease forwards;
+}
+
+@keyframes fadeSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Chart Boxes */
+.dashboard-chart-box {
+  width: 320px;
+  height: 180px;
+}
+
+.analytics-box {
+  width: 320px;
+  height: 320px;
+  margin: auto;
+}
+
+/* Notification */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 260px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  display: none;
+  font-weight: 500;
+  backdrop-filter: blur(15px);
+  animation: slideIn 0.3s ease;
+}
+
+.notification.success {
+  background: rgba(40,167,69,0.2);
+  border-left: 5px solid #28a745;
+}
+
+.notification.warning {
+  background: rgba(255,193,7,0.2);
+  border-left: 5px solid #ffc107;
+}
+
+.notification.error {
+  background: rgba(220,53,69,0.2);
+  border-left: 5px solid #dc3545;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Hidden */
+.hidden {
+  display: none;
+}
