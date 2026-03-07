@@ -7,6 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<div id="notificationBox" class="notification-box hidden"></div>
 
 <div class="container">
 
@@ -24,37 +25,85 @@
   <!-- CONTENT -->
   <div class="content">
 
+
+
+
+
+
+
+    
+
     <div id="notification" class="notification"></div>
 
     <!-- ================= DASHBOARD ================= -->
     <div id="dashboard" class="page">
 
-      <h2>Overview</h2>
+  <div class="dashboard-header">
+    <h1 class="greeting">Welcome back, <span id="userName"></span> 👋</h1>
+    <p class="subtext">Your financial overview for this month</p>
+  </div>
 
-      <table class="summary-table">
-        <tr>
-          <th>Total Spent</th>
-          <td id="spent">₹0</td>
-        </tr>
-        <tr>
-          <th>Monthly Budget</th>
-          <td>
-            ₹ <span id="budgetAmount">0</span><br><br>
-            <input type="number" id="dashboardBudgetInput" placeholder="Enter budget">
-            <button id="updateBudgetBtn">Update Budget</button>
-          </td>
-        </tr>
-        <tr>
-          <th>Remaining</th>
-          <td id="remaining">₹0</td>
-        </tr>
-      </table>
+  <div class="dashboard-main">
 
-      <div class="dashboard-chart-box">
-        <canvas id="summaryChart"></canvas>
+    <!-- LEFT SIDE CARDS -->
+    <div class="dashboard-cards">
+
+      <div class="glass-card">
+        <p>Total Spent</p>
+        <h2 id="spent">₹0</h2>
+      </div>
+
+      <div class="glass-card">
+        <p>Monthly Budget</p>
+        <h2>₹ <span id="budgetAmount">0</span></h2>
+        <input type="number" id="dashboardBudgetInput" placeholder="Enter budget">
+        <button id="updateBudgetBtn">Update Budget</button>
+      </div>
+
+      <div class="glass-card">
+        <p>Remaining</p>
+        <h2 id="remaining">₹0</h2>
       </div>
 
     </div>
+
+    <!-- RIGHT SIDE PROGRESS RING -->
+    <div class="progress-section">
+      <div class="progress-ring">
+        <svg width="220" height="220">
+          <circle cx="110" cy="110" r="95" stroke="#1e1e2f" stroke-width="15" fill="none"/>
+          <circle id="progressCircle"
+                  cx="110"
+                  cy="110"
+                  r="95"
+                  stroke="url(#gradient)"
+                  stroke-width="15"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-dasharray="597"
+                  stroke-dashoffset="597"/>
+          <defs>
+            <linearGradient id="gradient">
+              <stop offset="0%" stop-color="#00c6ff"/>
+              <stop offset="100%" stop-color="#a044ff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="progress-text">
+          <h2 id="progressPercent">0%</h2>
+          <p>Budget Used</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INSIGHT BOX -->
+  <div class="insight-box">
+    <p id="insightText">You are managing your money well.</p>
+  </div>
+
+</div>
 
     <!-- ================= ADD EXPENSE ================= -->
     <div id="addExpense" class="page hidden">
